@@ -32,9 +32,6 @@ const tweetData = {
       </article>
     `);
   
-    const timeAgo = timeSince(tweet.created_at);
-    $tweet.find('.tweet-footer').prepend(`<span class="time-ago">${timeAgo}</span>`);
-  
     return $tweet;
   };
   
@@ -55,9 +52,11 @@ const tweetData = {
 
   const renderTweets = function(tweets) {
     $('#tweets-container').empty();
-     tweets.forEach(function(tweet) {
-        const $tweet = createTweetElement(tweet);
-        $('#tweets-container').append($tweet);
+   tweets.forEach(function(tweet) {
+const $tweet = createTweetElement(tweet);
+const timeAgo = timeSince(tweet.created_at);
+   $tweet.find('.tweet-footer').prepend(`<span class="time-ago">${timeAgo}</span>`);
+   $('#tweets-container').prepend($tweet);
     });
   };
   
