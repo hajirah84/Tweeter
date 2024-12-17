@@ -22,7 +22,7 @@
   }
 
   .new-tweet label {
-    color: 4056A1; 
+    color: #4056A1; 
     font-size: 1.2em; 
   }
   
@@ -60,11 +60,15 @@
   button:hover {
     background-color: #2a3e7b; /* Darker blue on hover */
   }
-  
-  /* Counter styling */
   .counter {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #545149; /* Match label color */
-  }
+    font-size: 1.2em; /* Adjust font size */
+    color: #545149; /* Default color for counter */
+}
+
+/* When character count exceeds 140, change the counter color to red */
+.counter-overflow {
+    color: red; /* Red color for overflow */
+}
+
+  
   
