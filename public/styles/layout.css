@@ -19,8 +19,22 @@ body {
   background-color: #f4f1ec;
   font-size: 24px;
   font-family: 'Source Sans 3', sans-serif;
+  padding-top: 120px;
 }
 
+nav {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  height: 120px; 
+  padding: 0 1.5em; 
+  background-color: #4056A1; 
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; 
+}
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */

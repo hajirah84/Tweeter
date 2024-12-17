@@ -1,0 +1,33 @@
+
+header {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    width: 100%; /* Ensure header takes up full width */
+    height: 250px; /* Set height for the header */
+    background-color: #ead9eb; /* Different background color */
+    background-image: url('../images/arches.png'); /* Background texture */
+    background-repeat: repeat; /* Repeat the texture across the header */
+    background-size: cover; /* Scale the texture to cover the entire header */
+    padding: 20px 0; /* Add padding around the header */
+  }
+  
+  
+  .avatar {
+    width: 100px; /* Set width of the avatar */
+    height: 100px; /* Set height of the avatar */
+    border-radius: 50%; /* Make it circular */
+    background-image: url('../images/profile-hex.png'); /* Avatar image */
+    background-size: cover; /* Ensure the image fills the container */
+    background-position: center; /* Center the image within the circle */
+  }
+  
+  
+  .header-name {
+    margin-top: 10px; /* Add spacing between avatar and name */
+    color: #333; /* Set color of the name */
+    font-size: 1.2em; /* Adjust font size of the name */
+    font-family: 'Source Sans 3', sans-serif; /* Font family for the name */
+  }
+  
+  
