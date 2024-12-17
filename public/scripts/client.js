@@ -51,7 +51,7 @@ const tweetData = {
   };
 
   const renderTweets = function(tweets) {
-    $('#tweets-container').empty();
+    $('.tweets').empty();
    tweets.forEach(function(tweet) {
 const $tweet = createTweetElement(tweet);
 const timeAgo = timeSince(tweet.created_at);
@@ -59,5 +59,25 @@ const timeAgo = timeSince(tweet.created_at);
    $('#tweets-container').prepend($tweet);
     });
   };
+
+  $(document).ready(function() {
+    $('#tweet-form').on('submit', function(event) {
+      event.preventDefault(); 
+     const formData = $(this).serialize();
+      console.log(formData);
+
+      $.ajax({
+        method: 'POST',           
+        url: '/tweets',          
+        data: formData,           
+        success: function(response) {
+          console.log('Tweet successfully posted:', response);
+        },
+        error: function(err) {
+          console.error('Error posting tweet:', err);
+        }
+      });
+    });
+  });
   
 
