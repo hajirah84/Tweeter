@@ -1,0 +1,70 @@
+/* Section container for new tweet form */
+.new-tweet {
+    width: 100%;
+    padding: 20px 0; /* Add padding above and below */
+    border-bottom: 5px solid #545149; /* Bottom border */
+    margin-bottom: 20px; /* Space below the section */
+  }
+  
+  .new-tweet h2 {
+    text-align: center; /* Center align the header */
+    font-size: 1.5em;
+    color: #4056A1;
+    margin-bottom: 10px; /* Add spacing below the title */
+  }
+  
+  /* Style the form and its elements */
+  .new-tweet form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0 auto; /* Center the form horizontally */
+  }
+
+  .new-tweet label {
+    color: 4056A1; 
+    font-size: 1.2em; 
+  }
+  
+  
+  textarea {
+    border: none; /* Remove default border */
+    border-bottom: 3px solid #545149; /* Bottom border */
+    resize: none; /* Prevent resizing */
+    font-size: 1.2em;
+    padding: 10px;
+    margin-bottom: 10px; /* Add space below textarea */
+    background-color: transparent; /* Match background */
+    outline: none; /* Remove outline when focused */
+  }
+  
+  div {
+    display: flex;
+    justify-content: space-between; /* Space between button and counter */
+    align-items: center; /* Align items vertically */
+  }
+  
+  /* Tweet button styling */
+  button {
+    background-color: #4056A1; /* Blue background */
+    color: #FFFFFF; /* White text */
+    font-weight: bold;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family:"bungee" ;
+    font-size: 1.1em;
+  }
+  
+  button:hover {
+    background-color: #2a3e7b; /* Darker blue on hover */
+  }
+  
+  /* Counter styling */
+  .counter {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #545149; /* Match label color */
+  }
+  
