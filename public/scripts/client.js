@@ -9,9 +9,7 @@ const tweetData = {
     },
     "created_at": 1461116232227
   };
-
   
- 
   const createTweetElement = function(tweet) {
     const $tweet = $(`
       <article class="tweet">
@@ -36,24 +34,21 @@ const tweetData = {
     return $tweet;
   };
   
-
   const renderTweets = function(tweets) {
-    $('#tweets-container').empty();
-      for (const tweet of tweets) {
+    for (const tweet of tweets) {
       const $tweetElement = createTweetElement(tweet);
-        $('#tweets-container').prepend($tweetElement);
+      $('#tweets-container').prepend($tweetElement); 
     }
   };
   
-
   $(document).ready(function() {
     const loadTweets = function() {
       $.ajax({
         method: 'GET',
-        url: '/tweets', 
+        url: '/tweets',
         success: function(response) {
-          console.log('Tweets loaded successfully:', response);
-          renderTweets(response);
+          $('#tweets-container').empty(); 
+          renderTweets(response); 
         },
         error: function(err) {
           console.error('Error loading tweets:', err);
@@ -61,24 +56,36 @@ const tweetData = {
       });
     };
   
-    loadTweets(); 
-      $('#tweet-form').on('submit', function(event) {
-      event.preventDefault();
-      const formData = $(this).serialize();
+    loadTweets();
+    $('#tweet-form').on('submit', function(event) {
+      event.preventDefault(); 
   
-      $.ajax({
+      // Get tweet text and trim spaces
+      const tweetText = $('#tweet-text').val().trim();
+  
+      if (!tweetText) {
+        alert("🚫 Error! Your tweet is empty."); 
+        return; 
+      }
+        if (tweetText.length > 140) {
+        alert("🚫 Only 140 characters allowed per tweet."); 
+        return; 
+      }
+  
+      const formData = $(this).serialize();
+        $.ajax({
         method: 'POST',
         url: '/tweets',
         data: formData,
-        success: function(response) {
-          console.log('Tweet posted successfully:', response);
-          loadTweets();
+        success: function() {
+          $('#tweet-text').val(''); 
+          loadTweets(); 
         },
         error: function(err) {
           console.error('Error posting tweet:', err);
         }
       });
     });
-    
   });
+  
   
