@@ -27,6 +27,7 @@
     font-size: 1.2em;
   }
   
+  /* Textarea for Input */
   textarea {
     border: none;
     border-bottom: 3px solid #545149;
@@ -39,6 +40,7 @@
     width: 100%;
   }
   
+  /* Counter & Button Section */
   div {
     display: flex;
     justify-content: space-between;
@@ -71,6 +73,7 @@
     color: red;
   }
   
+  /* Styling for the Tweet container (with hover effect) */
   .tweet {
     border: 1px solid #d1d1d1;
     padding: 15px;
@@ -79,27 +82,36 @@
     margin-bottom: 15px;
     display: flex;
     flex-direction: column;
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease; /* Smoother hover effect for box-shadow */
   }
   
+  /* Hover effect on the tweet */
   .tweet:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
   
+  /* User profile image styling */
   .tweet .avatar {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-image: url('profile-hex.png'); /* Add a sample image here */
-    background-size: cover;
     margin-right: 10px;
   }
   
+  /* Avatar image styling */
+  .tweet .avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+  
+  /* Tweet Text Styling */
   .tweet .content {
     font-size: 1.1em;
     margin-bottom: 10px;
   }
   
+  /* Icons at the bottom of the tweet */
   .tweet-footer {
     display: flex;
     justify-content: space-between;
@@ -107,11 +119,14 @@
     font-size: 1.1em;
   }
   
+  /* Font Awesome Icon Hover */
   .tweet-footer .icon {
     cursor: pointer;
     transition: color 0.3s ease;
   }
-    .tweet-footer .icon:hover {
-    color: #4056A1; 
+  
+  /* Change color of icons on hover */
+  .tweet-footer .icon:hover {
+    color: #4056A1; /* Icon color when hovered */
   }
   
