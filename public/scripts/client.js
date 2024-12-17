@@ -52,5 +52,13 @@ const tweetData = {
     if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
     return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
   };
-   
+
+  const renderTweets = function(tweets) {
+    $('#tweets-container').empty();
+     tweets.forEach(function(tweet) {
+        const $tweet = createTweetElement(tweet);
+        $('#tweets-container').append($tweet);
+    });
+  };
+  
 
