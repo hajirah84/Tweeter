@@ -1,6 +1,5 @@
 $(document).ready(function() {
-    // Listen for input events in the textarea
-    $('#tweet-text').on('input', function() {
+    $('#tweet-text').on('keyup', function() {
       var remainingChars = 140 - this.value.length;
   
       $(this).siblings('.counter').text(remainingChars);
@@ -12,6 +11,7 @@ $(document).ready(function() {
       }
     });
   });
+  
   
   
   
