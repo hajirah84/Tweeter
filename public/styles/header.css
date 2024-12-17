@@ -4,7 +4,7 @@ header {
     justify-content: center; 
     align-items: center; 
     width: 100%; /* Ensure header takes up full width */
-    height: 250px; /* Set height for the header */
+    height: 400px; /* Set height for the header */
     background-color: #ead9eb; /* Different background color */
     background-image: url('../images/arches.png'); /* Background texture */
     background-repeat: repeat; /* Repeat the texture across the header */
