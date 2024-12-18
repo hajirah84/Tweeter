@@ -9,6 +9,11 @@ const tweetData = {
     },
     "created_at": 1461116232227
   };
+  const escape = function(str) {
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
   
   const createTweetElement = function(tweet) {
     const $tweet = $(`
@@ -20,7 +25,7 @@ const tweetData = {
             <span class="handle">${tweet.user.handle}</span>
           </div>
         </header>
-        <p class="tweet-content"></p>
+        <p class="tweet-content">${escape(tweet.content.text)}</p>
         <footer>
           <span class="time">${timeago.format(tweet.created_at)}</span>
           <div class="tweet-footer">
@@ -31,12 +36,12 @@ const tweetData = {
         </footer>
       </article>
     `);
-    $tweet.find('.tweet-content').text(tweet.content.text); 
     return $tweet;
   };
   
+  
   const renderTweets = function(tweets) {
-    $('#tweets-container').empty();
+    $('#tweets-container').empty(); 
     for (const tweet of tweets) {
       const $tweetElement = createTweetElement(tweet);
       $('#tweets-container').prepend($tweetElement);
@@ -61,7 +66,7 @@ const tweetData = {
         method: 'GET',
         url: '/tweets',
         success: function(response) {
-          renderTweets(response);
+          renderTweets(response); 
         },
         error: function(err) {
           console.error('Error loading tweets:', err);
@@ -73,28 +78,26 @@ const tweetData = {
     loadTweets();
   
     $('#tweet-form').on('submit', function(event) {
-      event.preventDefault();
+      event.preventDefault(); 
   
-      const tweetText = $('#tweet-text').val().trim();
+      const tweetText = $('#tweet-text').val().trim(); 
       if (!isTweetValid(tweetText)) {
-        return;
+        return; 
       }
   
-      const formData = $(this).serialize();
+      const formData = $(this).serialize(); 
         $.ajax({
         method: 'POST',
         url: '/tweets',
         data: formData,
-        success: function(newTweet) {
+        success: function() {
           $('#tweet-text').val(''); 
           $('.counter').text(140); 
-  
-          const $newTweetElement = createTweetElement(newTweet);
-          $('#tweets-container').prepend($newTweetElement);
+            loadTweets();
         },
         error: function(err) {
           console.error('Error posting tweet:', err);
-          alert("Error posting tweet.Please refresh the page and try again later.");
+          alert("❌ Failed to post your tweet. Please try again later.");
         }
       });
     });
