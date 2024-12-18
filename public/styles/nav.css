@@ -6,6 +6,7 @@ nav {
     display: flex; 
     align-items: center; 
     padding: 0 1.5em; 
+    padding: 20px 0;
     box-sizing: border-box; 
     justify-content: space-between;
     position: fixed;
@@ -19,6 +20,7 @@ nav {
     display: flex; 
     color: #FFFFFF; 
     align-items: center;
+    justify-content: end;
     font-family: 'Source Sans 3', sans-serif; 
     font-size: 1em; 
     margin-right: 1.5em;

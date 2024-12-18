@@ -1,10 +1,37 @@
 $(document).ready(function() {
+  var textArea = $("#tweet-text")
+  var counter = $(".counter");
+
+  $("#tweet-text").on("keyup", () => {
+    const text = textArea.val();
+    const currentCount = 140 - text.length;
+    counter.text(currentCount)
+    if (currentCount < 0) {
+      counter.removeClass('counter');
+      counter.addClass('counter-overflow');
+    } else {
+      counter.removeClass('counter-overflow');
+      counter.addClass('counter');
+    }
+
+  })
+
   const escape = function(str) {
     let div = document.createElement("div");
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
   };
-
+  const tweetData = {
+    "user": {
+      "name": "Newton",
+      "avatars": "https://i.imgur.com/73hZDYK.png",
+      "handle": "@SirIsaac"
+    },
+    "content": {
+      "text": "My Tweets"
+    },
+    "created_at": 1461116232227
+  };
   const createTweetElement = function(tweet) {
     const $tweet = $(`
       <article class="tweet">
@@ -38,14 +65,14 @@ $(document).ready(function() {
   };
 
   const isTweetValid = function(tweetText) {
-    $('#error-message').slideUp();
-
+    $('.error-message').slideUp();
+    console.log (tweetText)
     if (!tweetText) {
-      $('#error-message').text("Tweets with 0 characters are not allowed.").slideDown();
+      $('.error-message').text("Tweets with 0 characters are not allowed.").slideDown();
       return false; 
     }
     if (tweetText.length > 140) {
-      $('#error-message').text("Only 140 characters allowed per tweet.").slideDown();
+      $('.error-message').text("Only 140 characters allowed per tweet.").slideDown();
       return false; 
     }
     return true; 
@@ -56,6 +83,7 @@ $(document).ready(function() {
       method: 'GET',
       url: '/tweets',
       success: function(response) {
+        console.log("this is the response", response)
         renderTweets(response); 
       },
       error: function(err) {
@@ -85,11 +113,11 @@ $(document).ready(function() {
         $('#tweet-text').val(''); 
         $('.counter').text(140); 
         loadTweets();
-        $('#error-message').slideUp();
+        $('.error-message').slideUp();
       },
       error: function(err) {
         console.error('Error posting tweet:', err);
-        $('#error-message').text("❌ Failed to post your tweet. Please try again later.").slideDown();
+        $('.error-message').text(" Failure to post tweet. Refresh the page and try again later.").slideDown();
       }
     });
   });

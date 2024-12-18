@@ -1,4 +1,4 @@
-/* New Tweet Section */
+
 .new-tweet {
     width: 100%;
     padding: 20px 0;
@@ -40,7 +40,6 @@
     width: 100%;
   }
   
-  /* Counter & Button Section */
   div {
     display: flex;
     justify-content: space-between;
@@ -62,30 +61,34 @@
     background-color: #2a3e7b;
   }
   
-  /* Character Counter Styling */
   .counter {
     font-size: 1.1em;
     color: #545149;
   }
   
-  /* Counter Turn Red When Exceeds Limit */
   textarea:invalid + div .counter {
     color: red;
   }
+
+  .tweets {
+    width: 100%; /* Full width */
+    max-width: 600px; /* Mimics Twitter's width constraint */
+    margin: 0 auto; /* Centers the container */
+    /* No flex needed on the container for stacking */
+  }
   
-  /* Styling for the Tweet container (with hover effect) */
+  /* Individual tweet styling */
   .tweet {
     border: 1px solid #d1d1d1;
     padding: 15px;
     border-radius: 5px;
     background-color: #fff;
     margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-    transition: box-shadow 0.3s ease; /* Smoother hover effect for box-shadow */
+    transition: box-shadow 0.3s ease; 
+    width: 100%; /* Ensure the tweet takes full width */
+    display: block; /* Make sure each tweet is block-level */
   }
   
-  /* Hover effect on the tweet */
   .tweet:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
@@ -127,6 +130,16 @@
   
   /* Change color of icons on hover */
   .tweet-footer .icon:hover {
-    color: #4056A1; /* Icon color when hovered */
+    color: #4056A1; 
+  }
+  @media (max-width: 768px) {
+    .tweets .tweet {
+      flex: 1 1 calc(50% - 20px); 
+    }
   }
   
+  @media (max-width: 480px) {
+    .tweets .tweet {
+      flex: 1 1 100%; 
+    }
+  }

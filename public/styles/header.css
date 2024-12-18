@@ -1,7 +1,7 @@
 
 header {
     display: flex; 
-    justify-content: center; 
+    flex-direction: column;
     align-items: center; 
     width: 100%; /* Ensure header takes up full width */
     height: 400px; /* Set height for the header */
@@ -9,7 +9,8 @@ header {
     background-image: url('../images/arches.png'); /* Background texture */
     background-repeat: repeat; /* Repeat the texture across the header */
     background-size: cover; /* Scale the texture to cover the entire header */
-    padding: 20px 0; /* Add padding around the header */
+    padding: 20px;
+    padding-top: 20px;
   }
   
   

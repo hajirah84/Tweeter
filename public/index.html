@@ -34,7 +34,7 @@
       <div class ="tweeter">  <span>tweeter</span> </div>
      
       <div class="new-tweet">
-        <span>Write a new tweet</span>
+        <p style="padding: 1em">Write a new tweet</p>
         <i class="fas fa-angle-double-down"></i>
       </div>
     
@@ -45,10 +45,9 @@
       </div>
       <br>
       <div class = "header-name">
-        <h2>Your Name</h2>
+        <h2>Hajirah</h2>
       </div>
     </header>
-    Instruction
     
 
     <!-- Page-specific (main) content here -->
@@ -57,18 +56,23 @@
   <p>Write your thoughts here.</p>
   <section class="new-tweet">
     <h2>Compose Tweet</h2>
-    <form action="/tweets/" method="POST">
+    <form id="tweet-form"
+    action="/tweets/" method="POST" 
+    >
       <label for="tweet-text">What are you humming about?</label>
       <textarea name="text" id="tweet-text"></textarea>
       <div>
        
         <button type="submit">Tweet</button>
         <div class="error-message" style="display: none;"></div>
-        <output name="counter" class="counter" for="tweet-text">140</output>
+        <output class="counter">140</output>
       </div>
     </form>
   </section>
-
+  
+  <section class="tweets">
+  <div class="container" id="tweets-container"></div>
+  </section>
 
       <footer>
         <div class="tweet-icons">
