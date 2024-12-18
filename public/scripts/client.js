@@ -20,7 +20,7 @@ const tweetData = {
             <span class="handle">${tweet.user.handle}</span>
           </div>
         </header>
-        <p class="tweet-content">${tweet.content.text}</p>
+        <p class="tweet-content"></p>
         <footer>
           <span class="time">${timeago.format(tweet.created_at)}</span>
           <div class="tweet-footer">
@@ -31,14 +31,28 @@ const tweetData = {
         </footer>
       </article>
     `);
+    $tweet.find('.tweet-content').text(tweet.content.text); 
     return $tweet;
   };
   
   const renderTweets = function(tweets) {
+    $('#tweets-container').empty();
     for (const tweet of tweets) {
       const $tweetElement = createTweetElement(tweet);
-      $('#tweets-container').prepend($tweetElement); 
+      $('#tweets-container').prepend($tweetElement);
     }
+  };
+  
+  const isTweetValid = function(tweetText) {
+    if (!tweetText) {
+      alert("Tweets with 0 characters are not allowed.");
+      return false;
+    }
+    if (tweetText.length > 140) {
+      alert("Only 140 characters allowed per tweet.");
+      return false;
+    }
+    return true; 
   };
   
   $(document).ready(function() {
@@ -47,29 +61,23 @@ const tweetData = {
         method: 'GET',
         url: '/tweets',
         success: function(response) {
-          $('#tweets-container').empty(); 
-          renderTweets(response); 
+          renderTweets(response);
         },
         error: function(err) {
           console.error('Error loading tweets:', err);
+          alert("Failure to load tweets. Please refresh the page.");
         }
       });
     };
   
     loadTweets();
+  
     $('#tweet-form').on('submit', function(event) {
-      event.preventDefault(); 
+      event.preventDefault();
   
-      // Get tweet text and trim spaces
       const tweetText = $('#tweet-text').val().trim();
-  
-      if (!tweetText) {
-        alert("🚫 Error! Your tweet is empty."); 
-        return; 
-      }
-        if (tweetText.length > 140) {
-        alert("🚫 Only 140 characters allowed per tweet."); 
-        return; 
+      if (!isTweetValid(tweetText)) {
+        return;
       }
   
       const formData = $(this).serialize();
@@ -77,15 +85,18 @@ const tweetData = {
         method: 'POST',
         url: '/tweets',
         data: formData,
-        success: function() {
+        success: function(newTweet) {
           $('#tweet-text').val(''); 
-          loadTweets(); 
+          $('.counter').text(140); 
+  
+          const $newTweetElement = createTweetElement(newTweet);
+          $('#tweets-container').prepend($newTweetElement);
         },
         error: function(err) {
           console.error('Error posting tweet:', err);
+          alert("Error posting tweet.Please refresh the page and try again later.");
         }
       });
     });
   });
-  
   
