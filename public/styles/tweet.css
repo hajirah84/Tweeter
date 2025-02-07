@@ -1,4 +1,11 @@
-
+#tweets-container {
+  display: flex;
+  flex-direction: column; /* Force vertical stacking */
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  gap: 10px; /* Adds spacing between tweets */
+}
 .new-tweet {
     width: 100%;
     padding: 20px 0;
@@ -71,6 +78,8 @@
   }
 
   .tweets {
+    display: flex;
+    flex-direction: column;
     width: 100%; /* Full width */
     max-width: 600px; /* Mimics Twitter's width constraint */
     margin: 0 auto; /* Centers the container */
@@ -79,6 +88,8 @@
   
   /* Individual tweet styling */
   .tweet {
+    display: flex;
+    flex-direction: column;
     border: 1px solid #d1d1d1;
     padding: 15px;
     border-radius: 5px;
@@ -134,12 +145,11 @@
   }
   @media (max-width: 768px) {
     .tweets .tweet {
-      flex: 1 1 calc(50% - 20px); 
+      flex: none; /* Prevents side-by-side tweets */
     }
   }
-  
   @media (max-width: 480px) {
     .tweets .tweet {
-      flex: 1 1 100%; 
+      flex: none;
     }
   }
