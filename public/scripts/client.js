@@ -1,11 +1,11 @@
 $(document).ready(function() {
   var textArea = $("#tweet-text")
   var counter = $(".counter");
-
+// event listener for 'keyup'
   $("#tweet-text").on("keyup", () => {
     const text = textArea.val();
-    const currentCount = 140 - text.length;
-    counter.text(currentCount)
+    const currentCount = 140 - text.length; // calculate remaining characters
+    counter.text(currentCount) // update counter with how many characters are left
     if (currentCount < 0) {
       counter.removeClass('counter');
       counter.addClass('counter-overflow');
@@ -21,6 +21,7 @@ $(document).ready(function() {
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
   };
+  // sample tweet data
   const tweetData = {
     "user": {
       "name": "Newton",
@@ -32,6 +33,7 @@ $(document).ready(function() {
     },
     "created_at": 1461116232227
   };
+  // function to create the html structure for a tweet
   const createTweetElement = function(tweet) {
     const $tweet = $(`
       <article class="tweet">
@@ -53,17 +55,18 @@ $(document).ready(function() {
         </footer>
       </article>
     `);
-    return $tweet;
+    return $tweet; // return the tweet that was created
   };
-
+// function to make sure all tweets come on one page
   const renderTweets = function(tweets) {
-    $('#tweets-container').empty(); 
+    $('#tweets-container').empty(); //clear existing tweets
     for (const tweet of tweets) {
       const $tweetElement = createTweetElement(tweet);
-      $('#tweets-container').prepend($tweetElement);
+      $('#tweets-container').prepend($tweetElement); //prepend the newly created tweet to the container
     }
   };
 
+  //function to check if tweet is the required length - 140 characters
   const isTweetValid = function(tweetText) {
     $('.error-message').slideUp();
     console.log (tweetText)
@@ -71,20 +74,20 @@ $(document).ready(function() {
       $('.error-message').text("Tweets with 0 characters are not allowed.").slideDown();
       return false; 
     }
-    if (tweetText.length > 140) {
+    if (tweetText.length > 140) { //if tweet exceeds 140 characters
       $('.error-message').text("Only 140 characters allowed per tweet.").slideDown();
       return false; 
     }
     return true; 
   };
-
+// function to load tweets from the server
   const loadTweets = function() {
     $.ajax({
       method: 'GET',
       url: '/tweets',
       success: function(response) {
         console.log("this is the response", response)
-        renderTweets(response); 
+        renderTweets(response); //render the tweets
       },
       error: function(err) {
         console.error('Error loading tweets:', err);
@@ -94,7 +97,7 @@ $(document).ready(function() {
   };
 
   loadTweets();
-
+// event listener for tweet form
   $('#tweet-form').on('submit', function(event) {
     event.preventDefault(); 
 
@@ -104,19 +107,19 @@ $(document).ready(function() {
     }
 
     const formData = $(this).serialize(); 
-
+// ajax post request to submit tweet
     $.ajax({
       method: 'POST',
       url: '/tweets',
       data: formData,
       success: function() {
         $('#tweet-text').val(''); 
-        $('.counter').text(140); 
+        $('.counter').text(140); //reset counter
         loadTweets();
         $('.error-message').slideUp();
       },
       error: function(err) {
-        console.error('Error posting tweet:', err);
+        console.error('Error posting tweet:', err); // error message
         $('.error-message').text(" Failure to post tweet. Refresh the page and try again later.").slideDown();
       }
     });
