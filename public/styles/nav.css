@@ -1,16 +1,18 @@
 nav {
-    height: 120px; 
-    width: 100%; 
-    background-color: #4056A1; 
-    color: #FFFFFF; 
-    display: flex; 
-    align-items: center; 
-    padding: 0 1.5em; 
-    padding: 20px 0;
-    box-sizing: border-box; 
-    justify-content: space-between;
-    position: fixed;
-  }
+  height: 120px; /* Navbar stays at top */
+  width: 100%;
+  background-color: #4056A1;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5em;
+  box-sizing: border-box;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000 !important;  /* Ensure navbar is always on top */
+}
   
   .tweeter{
     font-family: 'Bungee', sans-serif; 

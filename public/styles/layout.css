@@ -14,12 +14,13 @@ html {
  * Global layout stuff
  */
 
-body {
+ body {
+  margin-top: 120px; /* Equal to navbar height */
   color: #545149;
   background-color: #f4f1ec;
   font-size: 24px;
   font-family: 'Source Sans 3', sans-serif;
-  padding-top: 120px;
+  padding-top: 140px;
 }
 
 nav {
@@ -37,8 +38,22 @@ nav {
 }
 
 main {
+  display: flex;
+  flex-direction: column;
   width: 90%; 
   margin: 0 auto; 
+  margin-top: 160px;
   background-color: inherit; 
   padding: 20px; 
+  margin-top: 140px;
+}
+main .new-tweet {
+  display: flex !important;  /* Ensure it is visible */
+  margin-top: 160px !important;
+  padding-top: 20px;
+  position: relative;
+  z-index: 900 !important;  
+  background-color: white; /* Make sure it's not blending with background */
+  position: relative !important;
+ /*the compose tweet section kept getting hidden behind the navbar so i thought this was a good solution*/
 }

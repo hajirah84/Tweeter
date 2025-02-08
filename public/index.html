@@ -10,82 +10,62 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
     <link rel="stylesheet" href="/styles/header.css" type="text/css">
-    <link rel ="stylesheet" href="/styles/new-tweet.css" type="text/css">
-    <link rel ="stylesheet" href ="/styles/tweet.css" type="text/css">
+    <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css">
+    <link rel="stylesheet" href="/styles/tweet.css" type="text/css">
 
-    <!-- External JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/timeago.js@4.0.2/dist/timeago.min.js"></script>
 
-
-    <!-- App JS -->
     <script type="text/javascript" src="/scripts/client.js"></script>
     <script src="scripts/composer-char-counter.js"></script> 
-
   </head>
 
   <body>
-    <!-- Top nav bar (fixed) -->
-    <nav>
-      <div class ="tweeter">  <span>tweeter</span> </div>
-     
-      <div class="new-tweet">
-        <p style="padding: 1em">Write a new tweet</p>
-        <i class="fas fa-angle-double-down"></i>
-      </div>
-    
-    </nav>
+  <!-- Top nav bar (fixed) -->
+  <nav>
+    <div class="tweeter"><span>tweeter</span></div>
+    <div class="new-tweet">
+      <p style="padding: 1em">Write a new tweet</p>
+      <i class="fas fa-angle-double-down"></i>
+    </div>
+  </nav>
+
+  <!-- Layout Container -->
+  <div class="layout">
     <header>
       <div class="avatar">
         <img src="/images/profile-hex.png">
       </div>
-      <br>
-      <div class = "header-name">
+      <div class="header-name">
         <h2>Hajirah</h2>
       </div>
     </header>
-    
 
-    <!-- Page-specific (main) content here -->
-    <main class="container">
-      <h1>Tweet tweet</h1>
-  <p>Write your thoughts here.</p>
-  <section class="new-tweet">
-    <h2>Compose Tweet</h2>
-    <form id="tweet-form"
-    action="/tweets/" method="POST" 
-    >
-      <label for="tweet-text">What are you humming about?</label>
-      <textarea name="text" id="tweet-text"></textarea>
-      <div>
-       
-        <button type="submit">Tweet</button>
-        <div class="error-message" style="display: none;"></div>
-        <output class="counter">140</output>
-      </div>
-    </form>
-  </section>
-  
-  <section class="tweets">
-  <div class="container" id="tweets-container"></div>
-  </section>
+    <!-- Main Content (Tweet Composer & Feed) -->
+    <main class="content">
+      <section class="new-tweet">
+        <h2>Compose Tweet</h2>
+        <form id="tweet-form" action="/tweets/" method="POST">
+          <label for="tweet-text">What are you humming about?</label>
+          <textarea name="text" id="tweet-text"></textarea>
+          <div>
+            <button type="submit">Tweet</button>
+            <div class="error-message" style="display: none;"></div>
+            <output class="counter">140</output>
+          </div>
+        </form>
+      </section>
 
-      <footer>
-        <div class="tweet-icons">
-          <button class="icon"><i class="fas fa-heart"></i></button>
-          <button class="icon"><i class="fas fa-retweet"></i></button>
-          <button class="icon"><i class="fas fa-reply"></i></button>
-        </div>
-      </footer>
-    </article>
-    <!-- Add more tweets here as needed -->
-  </section>
-</main>
-  
+      <section class="tweets">
+        <div class="container" id="tweets-container"></div>
+      </section>
     </main>
-  </body>
+  </div>
+</body>
+
 </html>
