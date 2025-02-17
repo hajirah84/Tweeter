@@ -36,6 +36,8 @@ nav {
   
   .new-tweet i {
     font-size: 1.2em; 
+    margin-left: auto;
+    padding: 10px 15px;
   }
   
   

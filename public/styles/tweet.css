@@ -102,8 +102,11 @@ textarea:invalid + div .counter {
 /* Tweet Box */
 .tweet {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   flex-direction: column;
   border: 1px solid #d1d1d1;
+  border-bottom: 1px solid #e1e8ed;
   padding: 15px;
   border-radius: 5px;
   background-color: #fff;
@@ -127,8 +130,8 @@ textarea:invalid + div .counter {
 
 /* Avatar image styling */
 .tweet .avatar img {
-  width: 100%;
-  height: 100%;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
 }
 
@@ -136,14 +139,17 @@ textarea:invalid + div .counter {
 .tweet .content {
   font-size: 1.1em;
   margin-bottom: 10px;
+  flex-grow: 1;
+  padding-left: 10px;
 }
 
 /* Tweet Footer Icons */
 .tweet-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   font-size: 1.1em;
+  gap: 10px;
 }
 
 /* Font Awesome Icon Hover */
