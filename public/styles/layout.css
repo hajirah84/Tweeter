@@ -1,60 +1,84 @@
-/*
- * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
- * https://css-tricks.com/international-box-sizing-awareness-day/
- * Do not modify these two selectors, please
- */
 html {
   box-sizing: border-box;
 }
-*, *:before, *:after {
+html *,
+html *::before,
+html *::after {
   box-sizing: inherit;
 }
 
-/*
- * Global layout stuff
- */
-
- body {
-  margin-top: 120px; /* Equal to navbar height */
+body {
   color: #545149;
   background-color: #f4f1ec;
   font-size: 24px;
-  font-family: 'Source Sans 3', sans-serif;
-  padding-top: 140px;
+  font-family: "Source Sans 3", sans-serif;
+  padding-top: 120px;
 }
 
-nav {
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  height: 120px; 
-  padding: 0 1.5em; 
-  background-color: #4056A1; 
-  position: fixed; 
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000; 
-}
-
-main {
+.profile-header {
+  width: 100%;
+  background-color: #f5ae2c;
+  background-image: url("/images/subtle-grunge.png");
+  background-repeat: repeat;
+  background-size: auto;
+  padding: 20px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
-  width: 90%; 
-  margin: 0 auto; 
-  margin-top: 160px;
-  background-color: inherit; 
-  padding: 20px; 
-  margin-top: 140px;
+  align-items: center;
+  justify-content: center;
 }
-main .new-tweet {
-  display: flex !important;  /* Ensure it is visible */
-  margin-top: 160px !important;
-  padding-top: 20px;
-  position: relative;
-  z-index: 900 !important;  
-  background-color: white; /* Make sure it's not blending with background */
-  position: relative !important;
- /*the compose tweet section kept getting hidden behind the navbar so i thought this was a good solution*/
+.profile-header img {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
 }
+.profile-header h2 {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 1.6rem;
+  margin: 0;
+  color: #545149;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+  width: 100%;
+  padding: 20px;
+  background-color: inherit;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .left-column {
+    flex: 0 0 512px;
+    margin-right: 20px;
+  }
+  .left-column .profile-header {
+    width: 100%;
+    height: auto;
+    margin-bottom: 0;
+  }
+  .new-tweet,
+  .tweets-container {
+    flex: 3;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .container {
+    max-width: 1920px;
+    margin: 0 auto;
+  }
+}
+
 

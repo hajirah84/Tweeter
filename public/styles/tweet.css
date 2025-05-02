@@ -1,187 +1,77 @@
-/* Main tweet section layout */
-.tweets-section {
-  flex: 1; /* Takes up remaining space beside the header */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-}
-
-/* Tweet container */
-#tweets-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  gap: 10px; /* Adds spacing between tweets */
-}
-
-/* New Tweet Section */
-.new-tweet {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding-bottom: 20px;
-  border-bottom: 2px solid #545149;
-}
-
-/* Heading Style */
-.new-tweet h2 {
-  text-align: center;
-  font-size: 1.5em;
-  color: #4056A1;
-  margin-bottom: 10px;
-}
-
-/* Form Styling */
-.new-tweet form {
-  display: flex;
-  flex-direction: column;
-  width: 90%;
-  margin: 0 auto;
-}
-
-.new-tweet label {
-  color: #4056A1;
-  font-size: 1.2em;
-}
-
-/* Textarea for Input */
-textarea {
-  border: none;
-  border-bottom: 3px solid #545149;
-  resize: none;
-  font-size: 1.2em;
+article.tweet {
+  border: 2px solid #4056A1;
+  border-radius: 8px;
+  background-color: #ffffff;
   padding: 10px;
-  margin-bottom: 10px;
-  background-color: transparent;
-  outline: none;
-  width: 100%;
-}
-
-div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-button {
-  background-color: #4056A1;
-  color: #FFFFFF;
-  font-weight: bold;
-  padding: 8px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1.1em;
-}
-
-button:hover {
-  background-color: #2a3e7b;
-}
-
-.counter {
-  font-size: 1.1em;
-  color: #545149;
-}
-
-textarea:invalid + div .counter {
-  color: red;
-}
-
-/* Individual Tweet Styling */
-.tweets {
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 600px;
-  margin: 20px auto 0;
-}
-
-/* Tweet Box */
-.tweet {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  border: 1px solid #d1d1d1;
-  border-bottom: 1px solid #e1e8ed;
-  padding: 15px;
-  border-radius: 5px;
-  background-color: #fff;
-  margin-bottom: 15px;
+  gap: 10px;
   transition: box-shadow 0.3s ease;
-  width: 100%;
 }
-
-/* Hover effect */
-.tweet:hover {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+article.tweet:hover {
+  box-shadow: 8px 8px 2px #d3d9f1;
 }
-
-/* User Profile Image */
-.tweet .avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
+article.tweet:focus {
+  outline: 1px solid #4056A1;
+  box-shadow: 8px 8px 2px #d3d9f1;
 }
-
-/* Avatar image styling */
-.tweet .avatar img {
+article.tweet .top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+article.tweet .profile-picture img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
-
-/* Tweet Text Styling */
-.tweet .content {
-  font-size: 1.1em;
-  margin-bottom: 10px;
+article.tweet .name {
   flex-grow: 1;
-  padding-left: 10px;
+  margin-left: 10px;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 1em;
+  color: #545149;
+  font-weight: bold;
 }
-
-/* Tweet Footer Icons */
-.tweet-footer {
+article.tweet .username {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 0.9em;
+  color: #545149;
+  font-style: italic;
+}
+article.tweet .content {
+  font-family: "Source Sans 3", sans-serif;
+  color: #545149;
+  font-size: 1em;
+  line-height: 1.4;
+  margin: 0;
+}
+article.tweet .bottom-row {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  font-size: 1.1em;
+  border-top: 2px solid #e3e3e3;
+  padding-top: 10px;
+}
+article.tweet .bottom-row .date {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 0.8em;
+  color: #545149;
+}
+article.tweet .bottom-row .icons {
+  display: flex;
   gap: 10px;
 }
-
-/* Font Awesome Icon Hover */
-.tweet-footer .icon {
+article.tweet .bottom-row .icons i {
+  font-size: 1em;
+  color: #4056A1;
   cursor: pointer;
   transition: color 0.3s ease;
 }
-
-/* Change color of icons on hover */
-.tweet-footer .icon:hover {
-  color: #4056A1; 
+article.tweet .bottom-row .icons i:hover {
+  color: #f5ae2c;
 }
-
-/* Responsive Layout */
-@media (max-width: 1024px) {
-  .tweets-section {
-      width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .tweets-section {
-      width: 100%;
-  }
-
-  .tweets .tweet {
-      flex: none; /* Prevents side-by-side tweets */
-  }
-}
-
-@media (max-width: 480px) {
-  .tweets .tweet {
-      flex: none;
-  }
+article.tweet .bottom-row .icons i:focus {
+  color: #f5ae2c;
 }

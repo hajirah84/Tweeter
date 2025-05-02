@@ -1,127 +1,159 @@
-$(document).ready(function() {
-  var textArea = $("#tweet-text")
-  var counter = $(".counter");
-// event listener for 'keyup'
-  $("#tweet-text").on("keyup", () => {
-    const text = textArea.val();
-    const currentCount = 140 - text.length; // calculate remaining characters
-    counter.text(currentCount) // update counter with how many characters are left
-    if (currentCount < 0) {
-      counter.removeClass('counter');
-      counter.addClass('counter-overflow');
-    } else {
-      counter.removeClass('counter-overflow');
-      counter.addClass('counter');
-    }
+/* eslint-disable no-undef */
 
-  })
+$(document).ready(function () {
+  // Hide the error message on initial load
+  $(".error-message").hide();
 
-  const escape = function(str) {
-    let div = document.createElement("div");
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-  };
-  // sample tweet data
-  const tweetData = {
-    "user": {
-      "name": "Newton",
-      "avatars": "https://i.imgur.com/73hZDYK.png",
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "My Tweets"
-    },
-    "created_at": 1461116232227
-  };
-  // function to create the html structure for a tweet
-  const createTweetElement = function(tweet) {
-    const $tweet = $(`
-      <article class="tweet">
-        <header>
-          <div class="user-info">
-            <img class="avatar" src="${tweet.user.avatars}" alt="User avatar">
-            <span class="name">${tweet.user.name}</span>
-            <span class="handle">${tweet.user.handle}</span>
-          </div>
-        </header>
-        <p class="tweet-content">${escape(tweet.content.text)}</p>
-        <footer>
-          <span class="time">${timeago.format(tweet.created_at)}</span>
-          <div class="tweet-footer">
-            <span class="icon"><i class="fas fa-flag"></i></span>
-            <span class="icon"><i class="fas fa-retweet"></i></span>
-            <span class="icon"><i class="fas fa-heart"></i></span>
-          </div>
-        </footer>
-      </article>
-    `);
-    return $tweet; // return the tweet that was created
-  };
-// function to make sure all tweets come on one page
-  const renderTweets = function(tweets) {
-    $('#tweets-container').empty(); //clear existing tweets
-    for (const tweet of tweets) {
-      const $tweetElement = createTweetElement(tweet);
-      $('#tweets-container').prepend($tweetElement); //prepend the newly created tweet to the container
-    }
-  };
-
-  //function to check if tweet is the required length - 140 characters
-  const isTweetValid = function(tweetText) {
-    $('.error-message').slideUp();
-    console.log (tweetText)
-    if (!tweetText) {
-      $('.error-message').text("Tweets with 0 characters are not allowed.").slideDown();
-      return false; 
-    }
-    if (tweetText.length > 140) { //if tweet exceeds 140 characters
-      $('.error-message').text("Only 140 characters allowed per tweet.").slideDown();
-      return false; 
-    }
-    return true; 
-  };
-// function to load tweets from the server
-  const loadTweets = function() {
-    $.ajax({
-      method: 'GET',
-      url: '/tweets',
-      success: function(response) {
-        console.log("this is the response", response)
-        renderTweets(response); //render the tweets
-      },
-      error: function(err) {
-        console.error('Error loading tweets:', err);
-        alert("Failure to load tweets. Please refresh the page.");
-      }
-    });
-  };
-
-  loadTweets();
-// event listener for tweet form
-  $('#tweet-form').on('submit', function(event) {
-    event.preventDefault(); 
-
-    const tweetText = $('#tweet-text').val().trim(); 
-    if (!isTweetValid(tweetText)) {
-      return; 
-    }
-
-    const formData = $(this).serialize(); 
-// ajax post request to submit tweet
-    $.ajax({
-      method: 'POST',
-      url: '/tweets',
-      data: formData,
-      success: function() {
-        $('#tweet-text').val(''); 
-        $('.counter').text(140); //reset counter
-        loadTweets();
-        $('.error-message').slideUp();
-      },
-      error: function(err) {
-        console.error('Error posting tweet:', err); // error message
-        $('.error-message').text(" Failure to post tweet. Refresh the page and try again later.").slideDown();
+  // Toggle the tweet form when the "Write a new tweet" button is clicked
+  $("nav .new-tweet").on("click", function () {
+    const $composeSection = $("section.new-tweet");
+    $composeSection.slideToggle(300, function () {
+      if ($composeSection.is(":visible")) {
+        $("#tweet-text").focus();
       }
     });
   });
+
+  const $scrollBtn = $("#scroll-to-top");
+  const $composeBox = $("section.new-tweet");
+  const $navToggle = $("nav .new-tweet");
+
+  // Show/hide the scroll-to-top button based on scroll position
+  $(window).on("scroll", function () {
+    if ($(window).scrollTop() > 200) {
+      $scrollBtn.fadeIn();
+      $navToggle.fadeOut();
+    } else {
+      $scrollBtn.fadeOut();
+      $navToggle.fadeIn();
+    }
+  });
+
+  $scrollBtn.on("click", function () {
+    $("html, body").animate({ scrollTop: 0 }, 300);
+    $composeBox.slideDown(300, function () {
+      $("#tweet-text").focus();
+    });
+  });
+
+  // Validate tweet content: not empty and max 140 characters
+  const isTweetValid = (text) => {
+    if (!text) return "Tweet cannot be empty!";
+    if (text.length > 140) return "Tweet exceeds the maximum length of 140 characters!";
+    return null;
+  };
+
+  // Display an error message
+  const displayError = (msg) => {
+    $(".error-message").text(msg).slideDown();
+  };
+
+  // Hide the error message
+  const removeError = () => {
+    $(".error-message").slideUp();
+  };
+
+  const buildTweet = (data) => {
+    const $tweet = $("<article>").addClass("tweet");
+
+    // Header row: avatar, name, handle
+    const $header = $("<div>").addClass("row top-row");
+    const $avatar = $("<div>")
+      .addClass("profile-picture")
+      .append(
+        $("<img>")
+          .attr("src", data.user.avatars)
+          .attr("alt", `Profile picture of ${data.user.name}`)
+      );
+    const $name = $("<div>").addClass("name").text(data.user.name);
+    const $handle = $("<div>").addClass("username").text(data.user.handle);
+    $header.append($avatar, $name, $handle);
+
+    const $body = $("<div>").addClass("row content").append(
+      $("<p>").text(data.content.text)
+    );
+
+    
+    const $footer = $("<div>").addClass("row bottom-row");
+    const $time = $("<div>").addClass("date").text(timeago.format(data.created_at));
+    const $actions = $("<div>")
+      .addClass("icons")
+      .append(
+        $("<i>").addClass("fa-solid fa-retweet"),
+        $("<i>").addClass("fa-solid fa-flag"),
+        $("<i>").addClass("fa-solid fa-heart")
+      );
+    $footer.append($time, $actions);
+
+    
+    $tweet.append($header, $body, $footer);
+    return $tweet;
+  };
+
+  const displayTweets = (list) => {
+    const $container = $(".tweets-container");
+    $container.empty(); 
+
+    for (const entry of list) {
+      const $tweetElement = buildTweet(entry);
+      $container.prepend($tweetElement); // Add new tweets
+    }
+  };
+
+  // render tweets
+  const fetchTweets = () => {
+    $.ajax({
+      url: "/tweets",
+      method: "GET",
+      dataType: "json",
+      success: (data) => {
+        displayTweets(data);
+      },
+      error: (err) => {
+        displayError("Error: Unable to load tweets. Please try again later.");
+        console.error("Fetch error:", err);
+      },
+    });
+  };
+
+  //  validate and post tweet
+  $(".new-tweet form").on("submit", function (e) {
+    e.preventDefault();
+
+    removeError();
+
+    const input = $("#tweet-text").val().trim();
+    const errorMsg = isTweetValid(input);
+
+    if (errorMsg) {
+      displayError(errorMsg);
+      return;
+    }
+
+    const formData = $(this).serialize();
+
+    $.ajax({
+      url: "/tweets",
+      method: "POST",
+      data: formData,
+      success: () => {
+        $("#tweet-text").val("");       // Clear input
+        $(".counter").text("140");      // Reset character counter
+        fetchTweets();                  // Refresh tweets
+      },
+      error: (err) => {
+        displayError("Error: Unable to post tweet. Please try again later.");
+        console.error("Post error:", err);
+      },
+    });
+  });
+
+  // Hide error message when the user focuses on the tweet box
+  $("#tweet-text").on("focus", function () {
+    removeError();
+  });
+
+  // Initial load of tweets
+  fetchTweets();
 });
+
