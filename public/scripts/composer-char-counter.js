@@ -11,7 +11,6 @@ $(document).ready(function () {
     // Update the counter text
     $counter.text(charsLeft);
 
-    // Turn counter red if limit exceeded
     if (charsLeft < 0) {
       $counter.addClass("over-limit");
     } else {

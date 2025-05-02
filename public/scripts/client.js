@@ -4,7 +4,7 @@ $(document).ready(function () {
   // Hide the error message on initial load
   $(".error-message").hide();
 
-  // Toggle the tweet form when the "Write a new tweet" button is clicked
+  // Toggle the tweet form 
   $("nav .new-tweet").on("click", function () {
     const $composeSection = $("section.new-tweet");
     $composeSection.slideToggle(300, function () {
@@ -18,7 +18,7 @@ $(document).ready(function () {
   const $composeBox = $("section.new-tweet");
   const $navToggle = $("nav .new-tweet");
 
-  // Show/hide the scroll-to-top button based on scroll position
+  
   $(window).on("scroll", function () {
     if ($(window).scrollTop() > 200) {
       $scrollBtn.fadeIn();
@@ -36,7 +36,7 @@ $(document).ready(function () {
     });
   });
 
-  // Validate tweet content: not empty and max 140 characters
+  // Validate tweet content and show error message
   const isTweetValid = (text) => {
     if (!text) return "Tweet cannot be empty!";
     if (text.length > 140) return "Tweet exceeds the maximum length of 140 characters!";
