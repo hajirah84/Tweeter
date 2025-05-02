@@ -1,17 +1,25 @@
-// track and manage tweet character count
-$(document).ready(function() {
-    $('#tweet-text').on('keyup', function() {
-      var remainingChars = 140 - this.value.length; // calculates remaining characters 
-  // updates the character counter
-      $(this).siblings('.counter').text(remainingChars);
-  
-      if (remainingChars < 0) {
-        $(this).siblings('.counter').addClass('counter-overflow');
-      } else {
-        $(this).siblings('.counter').removeClass('counter-overflow');
-      }
-    });
+$(document).ready(function () {
+  console.log("Character counter script loaded");
+
+  $(".new-tweet textarea").on("input", function () {
+    const maxLength = 140;
+    const inputLength = $(this).val().length;
+    const charsLeft = maxLength - inputLength;
+
+    const $counter = $(this).closest("form").find(".counter");
+
+    // Update the counter text
+    $counter.text(charsLeft);
+
+    // Turn counter red if limit exceeded
+    if (charsLeft < 0) {
+      $counter.addClass("over-limit");
+    } else {
+      $counter.removeClass("over-limit");
+    }
   });
+});
+
   
   
   

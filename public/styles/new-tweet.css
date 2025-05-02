@@ -72,3 +72,7 @@ section.new-tweet form div .counter.exceeded {
   text-align: center;
   margin: 10px 0;
 }
+
+.counter.over-limit {
+  color: red;
+}
