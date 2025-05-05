@@ -57,8 +57,9 @@ section.new-tweet form div .counter {
   color: #4056A1;
   transition: color 0.3s ease;
 }
-section.new-tweet form div .counter.exceeded {
-  color: red;
+
+.counter.over-limit {
+  color: red !important;
 }
 
 .error-message {
